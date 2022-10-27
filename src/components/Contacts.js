@@ -21,20 +21,37 @@ export default class Contacts extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
+  componentDidMount() {
+    const saveContacts = localStorage.getItem('contacts');
+    if (saveContacts?.length) {
+      this.setState({
+        saveContacts,
+      });
+    }
+  }
 
-  addContact = contacts => {
-    if (this.isDuplicate(contacts)) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
+  componentWillUnmount() {
+    localStorage.removeItem('contacts');
+  }
+
+  addContact = contact => {
+    if (this.isDuplicate(contact)) {
       return alert(
-        `${contacts.name} - ${contacts.number} is already on the site`
+        `${contact.name} - ${contact.number} is already on the site`
       );
     }
     this.setState(prev => {
       const newContact = {
         id: nanoid(),
-        ...contacts,
+        ...contact,
       };
       return {
         contacts: [...prev.contacts, newContact],
@@ -53,9 +70,9 @@ export default class Contacts extends Component {
   };
 
   handleChange = e => {
-    const { name, value } = e.target;
+    const { title, value } = e.target;
     this.setState({
-      [name]: value,
+      [title]: value,
     });
   };
 

@@ -4,15 +4,9 @@ import { Button, Input, Label } from './Contacts.Styled';
 
 export default class FormAddNumber extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
     name: '',
     number: '',
+    invalidForm: false,
   };
 
   contactsId = nanoid();
@@ -56,25 +50,29 @@ export default class FormAddNumber extends Component {
         <div>
           <Label htmlFor={nameId}>Name </Label>
           <Input
+            id={nameId}
             type="text"
             name="name"
+            value={this.state.name}
             onChange={handleChange}
+            minLength={3}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             placeholder="Enter name"
-            required
           ></Input>
         </div>
         <div>
           <Label htmlFor={numberId}> Number</Label>
           <Input
+            id={numberId}
             type="tel"
             name="number"
+            value={this.state.number}
             onChange={handleChange}
+            minLength={3}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             placeholder="Enter number"
-            required
           ></Input>
         </div>
         {invalidForm ? <div>Будь ласка заповніть поля</div> : null}
