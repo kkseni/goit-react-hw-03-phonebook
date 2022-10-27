@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Button, Input, Label } from './Contacts.Styled';
+import { Button, Input, Label, Notifie } from './Contacts.Styled';
 
 export default class FormAddNumber extends Component {
   state = {
@@ -75,7 +75,7 @@ export default class FormAddNumber extends Component {
             placeholder="Enter number"
           ></Input>
         </div>
-        {invalidForm ? <div>Будь ласка заповніть поля</div> : null}
+        {invalidForm ? <Notifie>Будь ласка заповніть поля</Notifie> : null}
         <Button type="button"> Додати контакт</Button>
       </form>
     );

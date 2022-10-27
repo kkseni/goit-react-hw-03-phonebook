@@ -77,3 +77,11 @@ export const Close = styled.button`
     color: #ff0000;
   }
 `;
+export const Notifie = styled.div`
+  width: 150px;
+  border: 2px solid #ff7f50;
+  color: #ff0000;
+  font-size: 18px;
+  line-heigth: 1.14;
+  padding: 5px;
+`;
